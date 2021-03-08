@@ -1,23 +1,41 @@
 import React from 'react';
-import {
-StyleSheet,
-Text,
-KeyboardAvoidingView,
-Platform,
-TextInput,
-View
-} from 'react-native';
+import {StyleSheet,Text,KeyboardAvoidingView,Platform,TextInput,View, ImageBackground,} from 'react-native';
+import SearchInput from './components/SearchInput';
+import getImageForWeather from './utils/getImageForWeather';
 
-export default function App() {
+export default class App extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.setState ={
+      location: 'Krakow',
+    };
+  }
+  
+
+    handleUpdateLocation = city =>{
+      this.setState({
+        location: city,
+      });
+    };
+
+    render(){
+      const {location} = this.state;
     return (
-      <View style={styles.container}>
-        <Text style={[styles.largeText, styles.textStyle]}>Krakow</Text>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <ImageBackground source={getImageForWeather('Clear')} style={styles.imageContainer} imageStyle={styles.image} >
+        <View style={styles.detailContainer}>
+        <Text style={[styles.largeText, styles.textStyle]}>{location}</Text>
         <Text style={[styles.smallText, styles.textStyle]}>Pada deszcz</Text>
         <Text style={[styles.largeText, styles.textStyle]}>5</Text>
-        <TextInput autoCorrect={false} placeholder="Wpisz nazwe miasta" placeholderTextColor="white" style={styles.textInput} clearButtonMode="always"/>
-      </View>
+        <SearchInput placeholder="Wpisz nazwe miasta" onSubmit={this.handleUpdateLocation}
+        />
+        </View>
+        </ImageBackground>
+      </KeyboardAvoidingView>
     );
   }
+}
 
   const styles = StyleSheet.create({
     container: {
@@ -26,40 +44,25 @@ export default function App() {
       alignItems: 'center',
       justifyContent: 'center',
     },
-    red: {
-      color: 'blue',
+    imageContainer: {
+      flex: 1,
+    },
+    image: {
+      flex: 1,
+      width: null,
+      height: null,
+      resizeMode: 'cover',
+    },
+    detailContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      backgroundColor: 'rgba(0,0,0,0.2)',
+      paddingHorizontal: 20,
     },
     textStyle: {
       textAlign: 'center',
       fontFamily: Platform.OS === 'ios' ? 'AvenirNext-Regular' : 'Roboto',
-    },
-    largeText: {
-      fontSize: 44,
-    },
-    smallText: {
-      fontSize: 18,
-    },
-    textInput: {
-      backgroundColor: '#666',
       color: 'white',
-      height: 40,
-      width: 300,
-      marginTop: 20,
-      marginHorizontal: 20,
-      paddingHorizontal:10,
-      alignSelf: 'center',
-    },
+    }
   });
   
-
-  // textStyle: {
-  //   textAlign: 'center',
-  //   ...Platform.select({
-  //   ios: {
-  //   fontFamily: 'AvenirNext-Regular',
-  //   },
-  //   android: {
-  //   fontFamily: 'Roboto',
-  //   },
-  //   }),
-  //   },
