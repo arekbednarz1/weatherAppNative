@@ -14,7 +14,6 @@ export default function App() {
         <Text style={[styles.largeText, styles.textStyle]}>Krakow</Text>
         <Text style={[styles.smallText, styles.textStyle]}>Pada deszcz</Text>
         <Text style={[styles.largeText, styles.textStyle]}>5</Text>
-        <TextInput autoCorrect={false} placeholder="Wpisz nazwe miasta" placeholderTextColor="white" style={styles.textInput} clearButtonMode="always"/>
       </View>
     );
   }
@@ -39,27 +38,5 @@ export default function App() {
     smallText: {
       fontSize: 18,
     },
-    textInput: {
-      backgroundColor: '#666',
-      color: 'white',
-      height: 40,
-      width: 300,
-      marginTop: 20,
-      marginHorizontal: 20,
-      paddingHorizontal:10,
-      alignSelf: 'center',
-    },
   });
   
-
-  // textStyle: {
-  //   textAlign: 'center',
-  //   ...Platform.select({
-  //   ios: {
-  //   fontFamily: 'AvenirNext-Regular',
-  //   },
-  //   android: {
-  //   fontFamily: 'Roboto',
-  //   },
-  //   }),
-  //   },
